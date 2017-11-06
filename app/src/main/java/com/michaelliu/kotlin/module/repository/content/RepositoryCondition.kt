@@ -1,4 +1,4 @@
-package com.michaelliu.kotlin
+package com.michaelliu.kotlin.module.repository.content
 
 /**
  * Description:
@@ -6,7 +6,7 @@ package com.michaelliu.kotlin
  * Created by liuguoquan on 2017/11/3 17:53.
  */
 
-class MainCondition {
+class RepositoryCondition {
   lateinit var q: String
   lateinit var sort: String
   lateinit var order: String

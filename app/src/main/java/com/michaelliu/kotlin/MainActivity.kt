@@ -1,21 +1,50 @@
 package com.michaelliu.kotlin
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener
+import android.view.MenuItem
 import android.widget.Toast
+import com.mdroid.app.TabManager
 import com.mdroid.lib.core.base.BaseActivity
+import com.mdroid.lib.core.base.BasePresenter
 import com.mdroid.lib.core.base.Status
 import com.mdroid.lib.core.base.Status.STATUS_NORMAL
-import com.michaelliu.kotlin.IMainContract.IMainPresenter
-import kotlinx.android.synthetic.main.activity_main.recyclerView
-import kotlinx.android.synthetic.main.activity_main.text_title
+import com.michaelliu.kotlin.module.repository.RepositoryFragment
+import kotlinx.android.synthetic.main.activity_main.navigation
 
-class MainActivity : BaseActivity<IMainContract.IMainView, IMainContract.IMainPresenter>() {
+class MainActivity : BaseActivity<Any, BasePresenter<Any>>(), OnNavigationItemSelectedListener {
 
-  private var mTitles: ArrayList<String> = ArrayList()
+  val REPOSITORY = "repository"
+  val USER = "user"
+  val MORE = "more"
+  lateinit var mTabManager: TabManager
 
-  override fun initPresenter(): IMainPresenter {
-    return MainPresenter(mLifecycleProvider,handler)
+  override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.navigation_home -> {
+        if (REPOSITORY != mTabManager.getCurrentTag()) {
+          mTabManager.changeTab(REPOSITORY)
+        }
+        return true
+      }
+      R.id.navigation_dashboard -> {
+        if (USER != mTabManager.getCurrentTag()) {
+          mTabManager.changeTab(USER)
+        }
+        return true
+      }
+      R.id.navigation_notifications -> {
+        if (MORE != mTabManager.getCurrentTag()) {
+          mTabManager.changeTab(MORE)
+        }
+        return true
+      }
+    }
+    return false
+  }
+
+  override fun initPresenter(): BasePresenter<Any>? {
+    return null
   }
 
   override fun getContentView(): Int {
@@ -31,21 +60,23 @@ class MainActivity : BaseActivity<IMainContract.IMainView, IMainContract.IMainPr
   }
 
   override fun initData(savedInstanceState: Bundle?) {
-    text_title.text = "Hello Kotlin"
-    text_title.setOnClickListener {
-      toastMsg("hello")
+    navigation.setOnNavigationItemSelectedListener(this)
+    mTabManager = TabManager(this, supportFragmentManager, R.id.main_container)
+    mTabManager.addTab(REPOSITORY, RepositoryFragment::class.java, null)
+        .addTab(USER, RepositoryFragment::class.java, null)
+        .addTab(MORE, RepositoryFragment::class.java, null)
+    if (savedInstanceState != null) {
+      mTabManager.restoreState(savedInstanceState)
+    } else {
+      mTabManager.changeTab(REPOSITORY)
     }
-    text_title.setOnLongClickListener { v ->
-      println(v.id)
-      return@setOnLongClickListener true
-    }
-    for (i in 0..5) {
-      mTitles.add("liu" + i)
-    }
-    recyclerView.layoutManager = LinearLayoutManager(this)
-    var adapter = MainAdapter(mTitles)
-    recyclerView.adapter = adapter
   }
+
+  override fun onSaveInstanceState(outState: Bundle?) {
+    super.onSaveInstanceState(outState)
+    mTabManager.onSaveInstanceState(outState)
+  }
+
   fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()
   }
