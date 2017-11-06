@@ -32,6 +32,7 @@ class RepositoryContentAdapter(
     var icon: ImageView? = holder?.getView(R.id.icon)
     ImageLoader.loadAsCircle(icon, R.mipmap.ic_launcher, item?.owner?.avatar_url)
     holder?.setText(R.id.name, item?.name)
+    holder?.setText(R.id.user_name, "Author: " + item?.owner?.login)
     holder?.setText(R.id.language, item?.language)
     holder?.setText(R.id.desc, item?.description)
     val stars = "stars:" + item?.stargazers_count + " " + "fork:" + item?.forks_count

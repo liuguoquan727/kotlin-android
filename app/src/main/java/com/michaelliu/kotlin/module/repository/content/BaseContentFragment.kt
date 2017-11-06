@@ -1,5 +1,7 @@
 package com.michaelliu.kotlin.module.repository.content
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -7,6 +9,7 @@ import com.mdroid.lib.core.base.Status
 import com.mdroid.lib.core.base.Status.STATUS_NORMAL
 import com.mdroid.lib.core.utils.Toost
 import com.mdroid.lib.recyclerview.BaseRecyclerViewAdapter.OnLoadingMoreListener
+import com.mdroid.lib.recyclerview.BaseRecyclerViewAdapter.OnRecyclerViewItemClickListener
 import com.mdroid.view.recyclerView.flexibledivider.DrawableDivider
 import com.michaelliu.kotlin.R
 import com.michaelliu.kotlin.base.LazyLoadFragment
@@ -23,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_content_repository.refresh_layout
  *
  * Created by liuguoquan on 2017/11/6 11:30.
  */
-abstract class BaseContentFragment : LazyLoadFragment<IRepositoryView, IRepositoryPresenter>(), IRepositoryView, OnLoadingMoreListener {
+abstract class BaseContentFragment : LazyLoadFragment<IRepositoryView, IRepositoryPresenter>(), IRepositoryView, OnLoadingMoreListener, OnRecyclerViewItemClickListener {
 
   lateinit var mAdapter: RepositoryContentAdapter
   var mIsDataLoaded: Boolean = false
@@ -58,6 +61,7 @@ abstract class BaseContentFragment : LazyLoadFragment<IRepositoryView, IReposito
       refresh()
     }
     mAdapter = RepositoryContentAdapter(mItems)
+    mAdapter.setOnRecyclerViewItemClickListener(this)
     mAdapter.setHasMore(mItems.size >= 10)
     mAdapter.setOnLoadingMoreListener(this)
     recyclerview.layoutManager = LinearLayoutManager(activity)
@@ -65,6 +69,14 @@ abstract class BaseContentFragment : LazyLoadFragment<IRepositoryView, IReposito
     recyclerview.adapter = mAdapter
     CommonUtils.setRecyclerViewLoadMore(activity, mAdapter, recyclerview)
 
+  }
+
+  override fun onItemClick(view: View?, position: Int) {
+    var intent = Intent()
+    intent.action = "android.intent.action.VIEW"
+    var uri: Uri = Uri.parse(mItems[position]?.html_url)
+    intent.data = uri
+    startActivity(intent)
   }
 
   override fun lazyInitView(parent: View?) {
