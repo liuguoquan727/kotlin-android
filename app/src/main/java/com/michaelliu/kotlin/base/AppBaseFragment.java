@@ -1,9 +1,14 @@
 package com.michaelliu.kotlin.base;
 
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
+import com.mdroid.app.TranslucentStatusCompat;
 import com.mdroid.lib.core.base.BaseFragment;
 import com.mdroid.lib.core.eventbus.EventBusEvent;
+import com.mdroid.lib.core.utils.UIUtil;
 import com.michaelliu.kotlin.R;
+import com.michaelliu.kotlin.utils.ToolBarUtils;
 
 /**
  * Description：
@@ -27,6 +32,24 @@ public abstract class AppBaseFragment<V extends AppBaseView, T extends AppBaseFr
 
   protected void dismissProcessDialog() {
 
+  }
+
+  protected void requestBaseInit(String title, boolean isBack) {
+    TranslucentStatusCompat.requestTranslucentStatus(getActivity());
+    getToolBarShadow().setVisibility(View.GONE);
+    Toolbar toolBar = getToolBar();
+    getStatusBar().setBackgroundResource(R.color.main_color_normal);
+    toolBar.setBackgroundResource(R.color.main_color_normal);
+    TextView tvTitle = UIUtil.setCenterTitle(toolBar, title);
+    ToolBarUtils.updateTitleText(tvTitle);
+    if (isBack) {
+      toolBar.setNavigationIcon(R.drawable.ic_back);
+      toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View view) {
+          getActivity().onBackPressed();
+        }
+      });
+    }
   }
 
   @Override public void onNotify(EventBusEvent event) {

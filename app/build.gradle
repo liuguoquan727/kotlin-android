@@ -12,7 +12,14 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -24,6 +31,7 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
 }
 
 dependencies {
@@ -32,9 +40,28 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation 'com.github.liuguoquan727.library:core:2.2.2'
+
+    compile "com.android.support:support-v4:${SUPPORT_VERSION}"
+    compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
+    compile "com.android.support:recyclerview-v7:${SUPPORT_VERSION}"
+    compile "com.android.support:design:${SUPPORT_VERSION}"
+    compile "com.android.support:multidex:1.0.2"
+
+    implementation 'com.github.liuguoquan727.library:core:2.4.2'
     // retrofit系列
     compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
     compile "com.squareup.retrofit2:converter-gson:${CONVERTER_GSON_VERSION}"
     compile "com.squareup.retrofit2:adapter-rxjava2:${ADAPTER_RXJAVA_VERSION}"
+
+    compile "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    compile "android.arch.persistence.room:rxjava2:1.0.0"
+
+    compile "android.arch.lifecycle:extensions:1.0.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
+
+    compile 'com.orhanobut:logger:2.1.1'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
 }

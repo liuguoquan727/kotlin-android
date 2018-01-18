@@ -9,6 +9,7 @@ import com.mdroid.lib.core.base.BaseActivity
 import com.mdroid.lib.core.base.BasePresenter
 import com.mdroid.lib.core.base.Status
 import com.mdroid.lib.core.base.Status.STATUS_NORMAL
+import com.michaelliu.kotlin.module.me.MeFragment
 import com.michaelliu.kotlin.module.repository.RepositoryFragment
 import kotlinx.android.synthetic.main.activity_main.navigation
 
@@ -63,8 +64,8 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>(), OnNavigationItemSe
     navigation.setOnNavigationItemSelectedListener(this)
     mTabManager = TabManager(this, supportFragmentManager, R.id.main_container)
     mTabManager.addTab(REPOSITORY, RepositoryFragment::class.java, null)
-        .addTab(USER, RepositoryFragment::class.java, null)
-        .addTab(MORE, RepositoryFragment::class.java, null)
+            .addTab(USER, MeFragment::class.java, null)
+            .addTab(MORE, MeFragment::class.java, null)
     if (savedInstanceState != null) {
       mTabManager.restoreState(savedInstanceState)
     } else {

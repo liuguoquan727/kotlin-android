@@ -2,6 +2,7 @@ package com.michaelliu.kotlin.module.repository
 
 import android.os.Bundle
 import android.view.View
+import com.mdroid.app.TranslucentStatusCompat
 import com.mdroid.lib.core.base.BaseFragment
 import com.mdroid.lib.core.base.BasePresenter
 import com.mdroid.lib.core.base.Status
@@ -41,9 +42,11 @@ class RepositoryFragment : BaseFragment<Any, BasePresenter<Any>>() {
   }
 
   override fun initView(parent: View?) {
-    mContentContainer.setPadding(0, statusBarHeight, 0, 0)
-    toolBarContainer.visibility = View.GONE
-    var textVew = UIUtil.setCenterTitle(tool_bar, pageTitle)
+    TranslucentStatusCompat.requestTranslucentStatus(activity)
+    statusBar.setBackgroundResource(R.color.main_color_normal)
+    toolBar.setBackgroundResource(R.color.main_color_normal)
+    toolBarShadow.visibility = View.GONE
+    var textVew = UIUtil.setCenterTitle(toolBar, pageTitle)
     CommonUtils.updateTitleText(textVew)
     val titles = Arrays.asList(*resources.getStringArray(R.array.category))
     viewpager.adapter = RepositoryAdapter(childFragmentManager, titles)

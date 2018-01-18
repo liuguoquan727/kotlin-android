@@ -3,7 +3,6 @@ package com.michaelliu.kotlin.module.repository.content
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
-import com.mdroid.lib.core.utils.ImageLoader
 import com.mdroid.lib.recyclerview.BaseRecyclerViewAdapter
 import com.mdroid.lib.recyclerview.BaseViewHolder
 import com.mdroid.utils.AndroidUtils
@@ -11,6 +10,7 @@ import com.mdroid.view.recyclerView.flexibledivider.DrawableDivider.DrawableProv
 import com.michaelliu.kotlin.R
 import com.michaelliu.kotlin.model.RepositoryModel
 import com.michaelliu.kotlin.model.RepositoryModel.RepositoryItem
+import com.michaelliu.kotlin.utils.ImageLoader
 
 /**
  * Description:
@@ -30,7 +30,7 @@ class RepositoryContentAdapter(
 
   override fun convert(holder: BaseViewHolder?, item: RepositoryItem?) {
     var icon: ImageView? = holder?.getView(R.id.icon)
-    ImageLoader.loadAsCircle(icon, R.mipmap.ic_launcher, item?.owner?.avatar_url)
+      ImageLoader.load(icon, R.mipmap.ic_launcher, item?.owner?.avatar_url)
     holder?.setText(R.id.name, item?.name)
     holder?.setText(R.id.user_name, "Author: " + item?.owner?.login)
     holder?.setText(R.id.language, item?.language)

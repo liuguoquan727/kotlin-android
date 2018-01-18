@@ -20,6 +20,7 @@
         app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
         >
       <android.support.v7.widget.Toolbar
+          android:visibility="gone"
           android:id="@+id/tool_bar"
           android:layout_width="match_parent"
           android:layout_height="?attr/toolBarSize"

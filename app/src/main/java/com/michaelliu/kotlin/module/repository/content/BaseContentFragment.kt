@@ -74,7 +74,7 @@ abstract class BaseContentFragment : LazyLoadFragment<IRepositoryView, IReposito
   override fun onItemClick(view: View?, position: Int) {
     var intent = Intent()
     intent.action = "android.intent.action.VIEW"
-    var uri: Uri = Uri.parse(mItems[position]?.html_url)
+      var uri: Uri = Uri.parse(mItems[position].html_url)
     intent.data = uri
     startActivity(intent)
   }
