@@ -82,7 +82,7 @@ public class ToolBarUtils {
   public static void updateTitleText(TextView titleView) {
     titleView.setTextColor(0xffffffff);
     titleView.getPaint().setFakeBoldText(true);
-    titleView.setTextSize(20.0f);
+    titleView.setTextSize(18.0f);
     titleView.setMaxEms(10);
   }
 

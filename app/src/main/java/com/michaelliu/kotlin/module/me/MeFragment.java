@@ -1,5 +1,7 @@
 package com.michaelliu.kotlin.module.me;
 
+import android.arch.lifecycle.LifecycleActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.mdroid.lib.core.base.Status;
 import com.mdroid.lib.core.utils.ActivityUtil;
 import com.michaelliu.kotlin.R;
 import com.michaelliu.kotlin.base.AppBaseFragment;
+import com.michaelliu.kotlin.module.me.lifycycle.AndroidLifeCycleActivity;
 import com.michaelliu.kotlin.module.me.room.RoomUI;
 
 /**
@@ -23,8 +26,6 @@ import com.michaelliu.kotlin.module.me.room.RoomUI;
  */
 
 public class MeFragment extends AppBaseFragment {
-  @BindView(R.id.room) TextView room;
-  @BindView(R.id.data_binding) TextView dataBinding;
 
   @Override protected Status getCurrentStatus() {
     return null;
@@ -43,21 +44,20 @@ public class MeFragment extends AppBaseFragment {
   }
 
   @Override protected void initData(Bundle savedInstanceState) {
-
   }
 
   @Override protected void initView(View parent) {
     requestBaseInit(getPageTitle(), false);
   }
 
-  @OnClick({ R.id.room, R.id.data_binding }) public void onClick(View v) {
+  @OnClick({ R.id.room, R.id.lifecycle }) public void onClick(View v) {
     switch (v.getId()) {
       case R.id.room:
         ActivityUtil.startActivity(this, RoomUI.class);
         break;
-      case R.id.data_binding:
-        //Intent intent = new Intent(this, DataBindingUI.class);
-        //ActivityUtil.startActivity(this,intent);
+      case R.id.lifecycle:
+        Intent intent = new Intent(getActivity(), AndroidLifeCycleActivity.class);
+        ActivityUtil.startActivity(this, intent);
         break;
     }
   }
