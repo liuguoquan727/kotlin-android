@@ -5,15 +5,16 @@ import android.support.design.widget.BottomNavigationView.OnNavigationItemSelect
 import android.view.MenuItem
 import android.widget.Toast
 import com.mdroid.app.TabManager
-import com.mdroid.lib.core.base.BaseActivity
-import com.mdroid.lib.core.base.BasePresenter
 import com.mdroid.lib.core.base.Status
 import com.mdroid.lib.core.base.Status.STATUS_NORMAL
+import com.michaelliu.kotlin.base.AppBaseActivity
+import com.michaelliu.kotlin.base.AppBaseActivityPresenter
+import com.michaelliu.kotlin.base.AppBaseView
 import com.michaelliu.kotlin.module.me.MeFragment
 import com.michaelliu.kotlin.module.repository.RepositoryFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<Any, BasePresenter<Any>>(), OnNavigationItemSelectedListener {
+class MainActivity : AppBaseActivity<AppBaseView<Any>, AppBaseActivityPresenter<AppBaseView<Any>>>(), OnNavigationItemSelectedListener {
 
     val REPOSITORY = "repository"
     val USER = "user"
@@ -44,7 +45,7 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>(), OnNavigationItemSe
         return false
     }
 
-    override fun initPresenter(): BasePresenter<Any>? {
+    override fun initPresenter(): AppBaseActivityPresenter<AppBaseView<Any>>? {
         return null
     }
 

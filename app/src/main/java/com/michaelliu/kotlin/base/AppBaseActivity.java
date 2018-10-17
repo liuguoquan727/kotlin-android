@@ -3,6 +3,8 @@ package com.michaelliu.kotlin.base;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import com.mdroid.lib.core.base.BaseActivity;
 import com.mdroid.lib.core.base.BaseView;
 import com.mdroid.lib.core.eventbus.EventBusEvent;
@@ -16,18 +18,30 @@ import com.michaelliu.kotlin.utils.ToolBarUtils;
 public abstract class AppBaseActivity<V extends AppBaseView, T extends AppBaseActivityPresenter<V>>
         extends BaseActivity<V, T> implements BaseView<T>, EventBusEvent.INotify {
 
+    private Unbinder mUnbinder;
+
+    @Override
+    protected void bind() {
+        mUnbinder = ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void unbind() {
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+    }
+
     /**
      * 数据等加载指示器，默认空实现
      *
      * @param isActive 是否正在处理
      */
     @Override
-    public void setLoadingIndicator(boolean isActive) {
-    }
+    public void setLoadingIndicator(boolean isActive) {}
 
     @Override
-    public void onNotify(EventBusEvent event) {
-    }
+    public void onNotify(EventBusEvent event) {}
 
     protected void requestBaseInit(Toolbar toolBar, String title) {
         toolBar.setBackgroundResource(R.color.main_color_normal);
