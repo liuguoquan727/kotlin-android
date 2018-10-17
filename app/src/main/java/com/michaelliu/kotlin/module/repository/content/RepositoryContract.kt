@@ -14,13 +14,13 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
  */
 
 interface RepositoryContract {
-  interface IRepositoryView : AppBaseView<IRepositoryPresenter> {
-    fun showSuccess(items: List<RepositoryModel.RepositoryItem>)
-    fun showError(error: String)
-  }
+    interface IRepositoryView : AppBaseView<IRepositoryPresenter> {
+        fun showSuccess(items: List<RepositoryModel.RepositoryItem>)
+        fun showError(error: String)
+    }
 
-  abstract class IRepositoryPresenter(provider: LifecycleProvider<FragmentEvent>,
-      handler: PausedHandler) : AppBaseFragmentPresenter<IRepositoryView>(provider, handler) {
-    abstract fun query(condition: RepositoryCondition)
-  }
+    abstract class IRepositoryPresenter(provider: LifecycleProvider<FragmentEvent>,
+                                        handler: PausedHandler) : AppBaseFragmentPresenter<IRepositoryView>(provider, handler) {
+        abstract fun query(condition: RepositoryCondition)
+    }
 }

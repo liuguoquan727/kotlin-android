@@ -13,12 +13,12 @@ import com.trello.rxlifecycle2.android.FragmentEvent
  * Created by liuguoquan on 2017/11/3 17:12.
  */
 abstract class AppBaseFragmentPresenter<V>(provider: LifecycleProvider<FragmentEvent>,
-    handler: PausedHandler) : BasePresenter<V>() {
+                                           handler: PausedHandler) : BasePresenter<V>() {
 
-  protected var mContext: Context = App.Instance()
-  protected var mProvider: LifecycleProvider<FragmentEvent> = provider
-  protected var mHandler: PausedHandler = handler
+    protected var mContext: Context = App.Instance()
+    protected var mProvider: LifecycleProvider<FragmentEvent> = provider
+    protected var mHandler: PausedHandler = handler
 
-  override fun onDestroy() {
-  }
+    override fun onDestroy() {
+    }
 }

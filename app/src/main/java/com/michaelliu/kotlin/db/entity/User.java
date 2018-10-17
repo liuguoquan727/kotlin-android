@@ -1,43 +1,46 @@
 package com.michaelliu.kotlin.db.entity;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Embedded;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.*;
 
 /**
  * Description:
  *
- * Created by liuguoquan on 2017/11/9 11:49.
+ * <p>Created by liuguoquan on 2017/11/9 11:49.
  */
+@Entity
+public class User {
 
-@Entity public class User {
+    @PrimaryKey(autoGenerate = true)
+    public int id;
 
-  @PrimaryKey(autoGenerate = true) public int id;
+    @ColumnInfo
+    public String userId;
 
-  @ColumnInfo public String userId;
+    @ColumnInfo
+    public String name;
 
-  @ColumnInfo public String name;
+    @ColumnInfo
+    public int age;
 
-  @ColumnInfo public int age;
+    @Embedded
+    public Address address;
 
-  @Embedded public Address address;
+    @Ignore
+    public String desc;
 
-  @Ignore public String desc;
-
-  @Override public String toString() {
-    return "User{"
-        + "id="
-        + id
-        + ", userId='"
-        + userId
-        + '\''
-        + ", name='"
-        + name
-        + '\''
-        + ", age="
-        + age
-        + '}';
-  }
+    @Override
+    public String toString() {
+        return "User{"
+                + "id="
+                + id
+                + ", userId='"
+                + userId
+                + '\''
+                + ", name='"
+                + name
+                + '\''
+                + ", age="
+                + age
+                + '}';
+    }
 }

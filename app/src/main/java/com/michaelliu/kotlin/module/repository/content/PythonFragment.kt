@@ -7,7 +7,7 @@ package com.michaelliu.kotlin.module.repository.content
  */
 class PythonFragment : BaseContentFragment() {
 
-  override fun getType(): String {
-    return "language:python"
-  }
+    override fun getType(): String {
+        return "language:python"
+    }
 }

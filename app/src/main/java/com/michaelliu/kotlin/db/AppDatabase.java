@@ -8,13 +8,14 @@ import com.michaelliu.kotlin.db.entity.User;
 /**
  * Description:
  *
- * Created by liuguoquan on 2017/11/9 11:57.
+ * <p>Created by liuguoquan on 2017/11/9 11:57.
  */
+@Database(
+        entities = {User.class},
+        version = 1)
+public abstract class AppDatabase extends RoomDatabase {
 
-@Database(entities = { User.class }, version = 1) public abstract class AppDatabase
-    extends RoomDatabase {
+    public static final String DB_NAME = "user";
 
-  public static final String DB_NAME = "user";
-
-  public abstract UserDao userDao();
+    public abstract UserDao userDao();
 }

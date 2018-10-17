@@ -7,9 +7,9 @@ package com.michaelliu.kotlin.module.repository.content
  */
 
 class RepositoryCondition {
-  lateinit var q: String
-  lateinit var sort: String
-  lateinit var order: String
-  var page: Int = 0
-  var limit: Int = 10
+    lateinit var q: String
+    lateinit var sort: String
+    lateinit var order: String
+    var page: Int = 0
+    var limit: Int = 10
 }

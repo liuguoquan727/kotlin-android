@@ -10,10 +10,8 @@ import com.mdroid.lib.core.base.Status.STATUS_NORMAL
 import com.mdroid.lib.core.utils.UIUtil
 import com.michaelliu.kotlin.R
 import com.michaelliu.kotlin.utils.CommonUtils
-import kotlinx.android.synthetic.main.fragment_repository.tablayout
-import kotlinx.android.synthetic.main.fragment_repository.tool_bar
-import kotlinx.android.synthetic.main.fragment_repository.viewpager
-import java.util.Arrays
+import kotlinx.android.synthetic.main.fragment_repository.*
+import java.util.*
 
 /**
  * Description:
@@ -22,36 +20,36 @@ import java.util.Arrays
  */
 class RepositoryFragment : BaseFragment<Any, BasePresenter<Any>>() {
 
-  override fun getContentView(): Int {
-    return R.layout.fragment_repository
-  }
+    override fun getContentView(): Int {
+        return R.layout.fragment_repository
+    }
 
-  override fun getPageTitle(): String {
-    return "仓库"
-  }
+    override fun getPageTitle(): String {
+        return "仓库"
+    }
 
-  override fun getCurrentStatus(): Status {
-    return STATUS_NORMAL
-  }
+    override fun getCurrentStatus(): Status {
+        return STATUS_NORMAL
+    }
 
-  override fun initPresenter(): BasePresenter<Any>? {
-    return null
-  }
+    override fun initPresenter(): BasePresenter<Any>? {
+        return null
+    }
 
-  override fun initData(savedInstanceState: Bundle?) {
-  }
+    override fun initData(savedInstanceState: Bundle?) {
+    }
 
-  override fun initView(parent: View?) {
-    TranslucentStatusCompat.requestTranslucentStatus(activity)
-    statusBar.setBackgroundResource(R.color.main_color_normal)
-    toolBar.setBackgroundResource(R.color.main_color_normal)
-    toolBarShadow.visibility = View.GONE
-    var textVew = UIUtil.setCenterTitle(toolBar, pageTitle)
-    CommonUtils.updateTitleText(textVew)
-    val titles = Arrays.asList(*resources.getStringArray(R.array.category))
-    viewpager.adapter = RepositoryAdapter(childFragmentManager, titles)
-    tablayout.setupWithViewPager(viewpager)
-  }
+    override fun initView(parent: View?) {
+        TranslucentStatusCompat.requestTranslucentStatus(activity)
+        statusBar.setBackgroundResource(R.color.main_color_normal)
+        toolBar.setBackgroundResource(R.color.main_color_normal)
+        toolBarShadow.visibility = View.GONE
+        var textVew = UIUtil.setCenterTitle(toolBar, pageTitle)
+        CommonUtils.updateTitleText(textVew)
+        val titles = Arrays.asList(*resources.getStringArray(R.array.category))
+        viewpager.adapter = RepositoryAdapter(childFragmentManager, titles)
+        tablayout.setupWithViewPager(viewpager)
+    }
 
 
 }

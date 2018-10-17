@@ -16,19 +16,19 @@ import io.reactivex.schedulers.Schedulers
  * Created by liuguoquan on 2017/11/6 10:42.
  */
 class RepositoryPresenter(provider: LifecycleProvider<FragmentEvent>,
-    handler: PausedHandler) : IRepositoryPresenter(provider, handler) {
+                          handler: PausedHandler) : IRepositoryPresenter(provider, handler) {
 
 
-  override fun query(condition: RepositoryCondition) {
-    Api.getSearchApi().search(condition.q, condition.sort, condition.order, condition.page,
-        condition.limit)
-        .subscribeOn(Schedulers.io()).observeOn(PausedHandlerScheduler.from(mHandler))
-        .compose(mProvider.bindUntilEvent(DESTROY_VIEW))
-        .subscribe({ model: RepositoryModel? ->
-          run {
-            mView.showSuccess(model?.items!!)
-          }
-        },
-            { error: Throwable -> run { mView.showError(error.message!!) } })
-  }
+    override fun query(condition: RepositoryCondition) {
+        Api.getSearchApi().search(condition.q, condition.sort, condition.order, condition.page,
+                condition.limit)
+                .subscribeOn(Schedulers.io()).observeOn(PausedHandlerScheduler.from(mHandler))
+                .compose(mProvider.bindUntilEvent(DESTROY_VIEW))
+                .subscribe({ model: RepositoryModel? ->
+                    run {
+                        mView.showSuccess(model?.items!!)
+                    }
+                },
+                        { error: Throwable -> run { mView.showError(error.message!!) } })
+    }
 }

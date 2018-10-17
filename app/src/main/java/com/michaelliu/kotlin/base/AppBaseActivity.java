@@ -14,34 +14,38 @@ import com.michaelliu.kotlin.utils.ToolBarUtils;
  * Description：
  */
 public abstract class AppBaseActivity<V extends AppBaseView, T extends AppBaseActivityPresenter<V>>
-    extends BaseActivity<V, T> implements BaseView<T>, EventBusEvent.INotify {
+        extends BaseActivity<V, T> implements BaseView<T>, EventBusEvent.INotify {
 
-  /**
-   * 数据等加载指示器，默认空实现
-   *
-   * @param isActive 是否正在处理
-   */
-  @Override public void setLoadingIndicator(boolean isActive) {
-  }
+    /**
+     * 数据等加载指示器，默认空实现
+     *
+     * @param isActive 是否正在处理
+     */
+    @Override
+    public void setLoadingIndicator(boolean isActive) {
+    }
 
-  @Override public void onNotify(EventBusEvent event) {
+    @Override
+    public void onNotify(EventBusEvent event) {
+    }
 
-  }
+    protected void requestBaseInit(Toolbar toolBar, String title) {
+        toolBar.setBackgroundResource(R.color.main_color_normal);
+        TextView tvTitle = UIUtil.setCenterTitle(toolBar, title);
+        tvTitle.setBackgroundResource(R.color.main_color_normal);
+        ToolBarUtils.updateTitleText(tvTitle);
+        toolBar.setNavigationIcon(R.drawable.ic_back);
+        toolBar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+    }
 
-  protected void requestBaseInit(Toolbar toolBar, String title) {
-    toolBar.setBackgroundResource(R.color.main_color_normal);
-    TextView tvTitle = UIUtil.setCenterTitle(toolBar, title);
-    tvTitle.setBackgroundResource(R.color.main_color_normal);
-    ToolBarUtils.updateTitleText(tvTitle);
-    toolBar.setNavigationIcon(R.drawable.ic_back);
-    toolBar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        finish();
-      }
-    });
-  }
-
-  @Override public void onDestroy() {
-    super.onDestroy();
-  }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

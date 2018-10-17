@@ -7,7 +7,7 @@ package com.michaelliu.kotlin.module.repository.content
  */
 class GoFragment : BaseContentFragment() {
 
-  override fun getType(): String {
-    return "language:go"
-  }
+    override fun getType(): String {
+        return "language:go"
+    }
 }

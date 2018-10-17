@@ -16,33 +16,33 @@ import com.michaelliu.kotlin.module.repository.content.PythonFragment
 class RepositoryAdapter(fm: FragmentManager, items: List<String>) : FragmentPagerAdapter(fm) {
 
 
-  var mItems: List<String> = items
+    var mItems: List<String> = items
 
-  override fun getItem(position: Int): Fragment {
-    when (position) {
-      0 -> {
+    override fun getItem(position: Int): Fragment {
+        when (position) {
+            0 -> {
+                return JavaFragment()
+            }
+            1 -> {
+                return PythonFragment()
+            }
+            2 -> {
+                return GoFragment()
+            }
+            3 -> {
+                return KotlinFragment()
+            }
+
+        }
         return JavaFragment()
-      }
-      1 -> {
-        return PythonFragment()
-      }
-      2 -> {
-        return GoFragment()
-      }
-      3 -> {
-        return KotlinFragment()
-      }
-
     }
-    return JavaFragment()
-  }
 
-  override fun getCount(): Int {
-    return mItems.size
-  }
+    override fun getCount(): Int {
+        return mItems.size
+    }
 
-  override fun getPageTitle(position: Int): CharSequence {
-    return mItems[position]
-  }
+    override fun getPageTitle(position: Int): CharSequence {
+        return mItems[position]
+    }
 
 }
